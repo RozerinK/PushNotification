@@ -16,7 +16,7 @@ import com.google.firebase.messaging.RemoteMessage;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService  {
 
-    private static final String TAG = "MyFirebaseMsgService";
+    private static final String TAG = "FireBaseNotification";
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -24,11 +24,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService  {
         if (remoteMessage.getData().size() > 0) { // Data mesajı içeriyor mu
             //Uygulama arkaplanda veya ön planda olması farketmez. Her zaman çağırılacaktır.
             //Gelen içerik json formatındadır.
-            Log.d(TAG, "Mesaj data içeriği: " + remoteMessage.getData());
+            Log.d(TAG, "Content of Message: " + remoteMessage.getData());
 
             //Json formatındaki datayı parse edip kullanabiliriz. Biz direk datayı Push Notification olarak bastırıyoruz
 
-            sendNotification("Mobilhanem.com",""+remoteMessage.getData());
+            sendNotification("FireBaseNotification",""+remoteMessage.getData());
 
         }
 
@@ -36,7 +36,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService  {
             //Uygulama arkaplanda ise burası çağrılmaz.Ön planda ise notification mesajı geldiğinde çağırılır
             //getBody() ile mesaj içeriği
             //getTitle() ile mesaj başlığı
-            Log.d(TAG, "Mesaj Notification Başlığı: " + remoteMessage.getNotification().getTitle() +" "+"Mesaj Notification İçeriği: " + remoteMessage.getNotification().getBody() );
+            Log.d(TAG, "Header of message: " + remoteMessage.getNotification().getTitle() +" "+"Content of Message: " + remoteMessage.getNotification().getBody() );
 
             //Gelen içeriğe göre notifikasyon bildiriminde bulunma
             sendNotification(remoteMessage.getNotification().getTitle(),remoteMessage.getNotification().getBody());
